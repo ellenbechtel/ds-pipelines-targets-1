@@ -1,4 +1,4 @@
-process_data <- function(file_in, file_out){
+process_data <- function(file_in){
   # Prepare the data for plotting
   readr::read_csv(mendota_file, col_types = 'iccd') %>%
     filter(str_detect(exper_id, 'similar_[0-9]+')) %>%
@@ -14,8 +14,14 @@ process_data <- function(file_in, file_out){
   
 }
 
+write_data <-  function(eval_data, file_out) {
+  write_csv(eval_data, file = file_out)
+  return(file_out)
+}
 
-save_diagrnostics <- function(eval_data, project_output_dir, file_diag){
+
+save_diagnostics <- function(eval_data, project_output_dir, file_diag){
+  
   # Save the model diagnostics
   render_data <- list(pgdl_980mean = filter(eval_data, model_type == 'pgdl', exper_id == "similar_980") %>% pull(rmse) %>% mean %>% round(2),
                       dl_980mean = filter(eval_data, model_type == 'dl', exper_id == "similar_980") %>% pull(rmse) %>% mean %>% round(2),
