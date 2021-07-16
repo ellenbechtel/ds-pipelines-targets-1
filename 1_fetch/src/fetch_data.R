@@ -8,6 +8,6 @@ fetch_data <- function(project_output_dir, sb_item, sb_file, out_file) {
   } 
 
   #create file name  
-  mendota_file <- file.path(project_output_dir, out_file)
-  sbtools::item_file_download(sb_item, names = sb_file, destinations = mendota_file, overwrite_file = TRUE)
+  local_sb_file <- file.path(project_output_dir, out_file)
+  sbtools::item_file_download(sb_item, names = sb_file, destinations = local_sb_file, overwrite_file = TRUE)
 }
